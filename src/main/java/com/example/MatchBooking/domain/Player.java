@@ -1,17 +1,20 @@
 package com.example.MatchBooking.domain;
 
+import com.example.MatchBooking.command.PlayerCommand;
 import com.example.MatchBooking.enums.Position;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 public class Player extends BaseEntity{
     @Column
     private String firstName;
@@ -28,4 +31,12 @@ public class Player extends BaseEntity{
     @OneToOne
     private Stats stats;
 
+    public Player(PlayerCommand playerCommand) {
+        super();
+        firstName = playerCommand.getFirstName();
+        lastName = playerCommand.getLastName();
+        email = playerCommand.getEmail();
+        phone = playerCommand.getPhone();
+        dob = playerCommand.getDob();
+    }
 }
