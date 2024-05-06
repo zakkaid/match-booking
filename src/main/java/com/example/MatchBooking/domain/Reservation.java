@@ -16,5 +16,9 @@ public class Reservation extends BaseEntity{
     private LocalDateTime matchStartAt;
     @Column
     private LocalDateTime matchEndAt;
+    @OneToOne
+    private Field fieldReserved;
+
+
 
 }

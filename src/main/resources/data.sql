@@ -9,3 +9,14 @@ VALUES ('player_id_1', 1);
 
 INSERT INTO matchbooking.player_positions (player_id, positions)
 VALUES ('player_id_2', 5);
+use matchbooking;
+INSERT INTO field_type (ID, name, capacity, price, VERSION, CREATED_AT, created_by, UPDATED_AT, updated_by, DELETED, ACTIVE)
+VALUES
+    ('field_type_id_1', 'Type 1', 100, 50.0, 1, '2024-05-05 00:00:00', 'admin', '2024-05-05 00:00:00', 'admin', false, true),
+    ('field_type_id_2', 'Type 2', 150, 75.0, 1, '2024-05-05 00:00:00', 'admin', '2024-05-05 00:00:00', 'admin', false, true);
+
+INSERT INTO field (ID, code, field_type_id, VERSION, CREATED_AT, created_by, UPDATED_AT, updated_by, DELETED, ACTIVE)
+VALUES
+    ('field_id_1', 123, 'field_type_id_1', 1, '2024-05-05 00:00:00', 'admin', '2024-05-05 00:00:00', 'admin', false, true),
+    ('field_id_2', 456, 'field_type_id_2', 1, '2024-05-05 00:00:00', 'admin', '2024-05-05 00:00:00', 'admin', false, true);
+
