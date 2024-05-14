@@ -13,4 +13,6 @@ public interface FieldRepository extends JpaRepository<Field,String> {
     @Query("select f from Field f where f not in" +
             " (select r.fieldReserved from Reservation r where :time between r.matchEndAt and r.matchEndAt)")
     List<Field> findAllAvailableFields(LocalDateTime time);
+
+
 }

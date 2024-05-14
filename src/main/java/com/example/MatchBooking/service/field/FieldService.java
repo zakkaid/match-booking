@@ -6,5 +6,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface FieldService {
-    public List<Field> getAllAvailableFields(LocalDateTime reservationDate);
+    List<Field> getAllAvailableFields(LocalDateTime reservationDate);
 }
