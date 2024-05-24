@@ -3,6 +3,7 @@ package com.example.MatchBooking.domain;
 import com.example.MatchBooking.command.FieldTypeCommand;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class FieldType extends BaseEntity{
     private int capacity;
     @Column
     private float price;
-    @OneToMany(mappedBy = "fieldType")
+    @OneToMany(mappedBy = "fieldType" , fetch = FetchType.LAZY)
     private List<Field> field;
 
     public FieldType createFieldType(FieldTypeCommand fieldTypeCommand){

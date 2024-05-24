@@ -11,4 +11,6 @@ public class Field extends BaseEntity{
     private int code;
     @ManyToOne
     private FieldType fieldType;
+
+
 }

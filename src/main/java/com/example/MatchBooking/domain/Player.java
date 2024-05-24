@@ -2,10 +2,7 @@ package com.example.MatchBooking.domain;
 
 import com.example.MatchBooking.command.PlayerCommand;
 import com.example.MatchBooking.enums.Position;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -27,6 +24,7 @@ public class Player extends BaseEntity{
     @Column
     private LocalDateTime dob;
     @ElementCollection
+    @Enumerated
     private List<Position> positions;
     @OneToOne
     private Stats stats;

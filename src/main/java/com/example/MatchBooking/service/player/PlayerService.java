@@ -5,4 +5,5 @@ import com.example.MatchBooking.domain.Player;
 
 public interface PlayerService {
     Player createPlayer(PlayerCommand playerCommand);
+    Player getPlayerById(String id);
 }

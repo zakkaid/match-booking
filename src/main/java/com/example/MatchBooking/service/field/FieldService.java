@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FieldService {
     List<Field> getAllAvailableFields(LocalDateTime reservationDate);
+    Field getFieldById(String id);
 }
