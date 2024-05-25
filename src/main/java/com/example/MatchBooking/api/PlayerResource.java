@@ -69,5 +69,10 @@ public class PlayerResource {
         return ResponseEntity.ok(reservationService.getAllReservations(id));
     }
 
+    @GetMapping("/availability")
+    public ResponseEntity<Boolean> playerAvailability(@RequestParam String id , @RequestParam LocalDateTime localDateTime){
+        return ResponseEntity.ok(reservationService.isAvailable(id,localDateTime));
+    }
+
 
 }

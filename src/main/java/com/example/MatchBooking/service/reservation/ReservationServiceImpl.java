@@ -11,6 +11,7 @@ import com.example.MatchBooking.service.player.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,15 +26,20 @@ public class ReservationServiceImpl implements ReservationService{
     public Reservation reserveField(ReservationCommand reservationCommand) {
         reservationCommand.validate();
         final Reservation reservation = new Reservation();
-        reservation.setReservedBy(playerService.getPlayerById(reservationCommand.getReservedBy()));
+        final Reservation reservation1 = reservation.create(reservationCommand);
+        reservation1.setReservedBy(playerService.getPlayerById(reservationCommand.getReservedBy()));
         Field field = fieldService.getFieldById(reservationCommand.getFieldReserved());
-        reservation.setFieldReserved(field);
-        reservation.create(reservationCommand);
-        return reservationRepository.save(reservation);
+        reservation1.setFieldReserved(field);
+        return reservationRepository.save(reservation1);
     }
 
     @Override
     public List<ReservationDTO> getAllReservations(String id) {
         return reservationMapper.toReservationDTO(reservationRepository.findPlayerReservations(id));
+    }
+
+    @Override
+    public boolean isAvailable(String id , LocalDateTime localDateTime) {
+        return (!reservationRepository.isReservationExist(id,localDateTime));
     }
 }
