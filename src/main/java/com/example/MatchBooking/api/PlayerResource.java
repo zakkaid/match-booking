@@ -1,6 +1,7 @@
 package com.example.MatchBooking.api;
 
 import com.example.MatchBooking.command.PlayerLoginCommand;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.example.MatchBooking.command.PlayerCommand;
 import com.example.MatchBooking.command.ReservationCommand;
 import com.example.MatchBooking.dto.FieldDTO;
@@ -25,7 +26,7 @@ import static com.example.MatchBooking.constants.ResourcePath.V1;
 @RestController
 @RequestMapping(V1+PLAYER)
 @RequiredArgsConstructor
-@CrossOrigin("http://http://localhost:3001/")
+@CrossOrigin("http://localhost:3001/")
 public class PlayerResource {
     private final PlayerService playerService;
     private final FieldService fieldService;
@@ -38,10 +39,7 @@ public class PlayerResource {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/availableFields")
-    public ResponseEntity<List<FieldDTO>> getAvailableFields(@RequestParam LocalDateTime time){
-        return ResponseEntity.ok(fieldService.getAllAvailableFields(time));
-    }
+
 
     @PostMapping("/reserve")
     public ResponseEntity<Void> reserve(@RequestBody ReservationCommand reservationCommand){
@@ -54,10 +52,23 @@ public class PlayerResource {
         return ResponseEntity.ok(fieldMapper.toFieldDTO(fieldService.getFieldById(id)));
     }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<PlayerDTO> login(@RequestBody PlayerLoginCommand playerLoginCommand){
+//        return ResponseEntity.ok(playerService.authenticate(playerLoginCommand));
+//    }
+
     @PostMapping("/login")
-    public ResponseEntity<PlayerDTO> login(@RequestBody PlayerLoginCommand playerLoginCommand){
+    public ResponseEntity<PlayerDTO> login(@RequestBody JsonNode request){
+
+        JsonNode playerJson = request.get("player");
+
+        PlayerLoginCommand playerLoginCommand = new PlayerLoginCommand();
+        playerLoginCommand.setEmail(playerJson.get("email").asText());
+        playerLoginCommand.setPassword(playerJson.get("password").asText());
+
         return ResponseEntity.ok(playerService.authenticate(playerLoginCommand));
     }
+
     @GetMapping("/positions")
     public ResponseEntity<List<Position>> getAllPositions() {
         List<Position> positions = Arrays.asList(Position.values());
