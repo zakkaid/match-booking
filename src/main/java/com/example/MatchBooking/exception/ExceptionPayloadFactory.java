@@ -14,6 +14,7 @@ public enum ExceptionPayloadFactory {
     INVALID_FORM_REGISTRATION_PAYLOAD(4, HttpStatus.BAD_REQUEST, "invalid.form.registration"),
     FIELD_NOT_FOUND(5, HttpStatus.BAD_REQUEST, "field.not.found"),
     PLAYER_NOT_FOUND(6, HttpStatus.BAD_REQUEST, "player.not.found"),
+    EMAIL_OR_PASSWORD_WRONG(7, HttpStatus.BAD_REQUEST, "email.or.password.wrong"),
     ;
 
     private final Integer code;

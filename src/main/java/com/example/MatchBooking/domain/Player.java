@@ -22,9 +22,11 @@ public class Player extends BaseEntity{
     @Column
     private String phone;
     @Column
+    private String password;
+    @Column
     private LocalDateTime dob;
     @ElementCollection
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private List<Position> positions;
     @OneToOne
     private Stats stats;
@@ -35,6 +37,7 @@ public class Player extends BaseEntity{
         lastName = playerCommand.getLastName();
         email = playerCommand.getEmail();
         phone = playerCommand.getPhone();
+        password = playerCommand.getPassword();
         dob = playerCommand.getDob();
     }
 }

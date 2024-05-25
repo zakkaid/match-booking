@@ -18,12 +18,14 @@ public class PlayerCommand implements Validatable {
     private final String lastName;
     private final String email;
     private final String phone;
+    private final String password;
     private final LocalDateTime dob;
 
     @Override
     public void validate() {
         Assert.assertNotNull(firstName);
         Assert.assertNotNull(lastName);
+        Assert.assertNotNull(password);
         Assert.assertRegex(email,EMAIL);
         Assert.assertRegex(phone,PHONE_NUMBER);
         Assert.assertNotNull(dob);

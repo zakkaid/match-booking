@@ -2,28 +2,35 @@ package com.example.MatchBooking.enums;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public enum Position {
-    GK(1),
-    CB(2),
-    RB(3),
-    LB(4),
-    RWB(5),
-    LWB(6),
-    MDC(7),
-    MC(8),
-    MOC(9),
-    CAM(10),
-    LW(11),
-    LF(12),
-    RF(13),
-    RW(14),
-    ST(15),
-    CF(16);
+    GK,
+    CB,
+    RB,
+    LB,
+    RWB,
+    LWB,
+    MDC,
+    MC,
+    MOC,
+    CAM,
+    LW,
+    LF,
+    RF,
+    RW,
+    ST,
+    CF;
 
-    private final int value;
 
-    Position(int value) {
-        this.value=value;
+
+    public static List<String> getAllPositions() {
+        List<String> allPositions = new ArrayList<>();
+        for (Position position : Position.values()) {
+            allPositions.add(position.name());
+        }
+        return allPositions;
     }
 }
