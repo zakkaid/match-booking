@@ -25,7 +25,6 @@ public class ReservationCommand implements Validatable {
 
         Assert.assertNotNull(fieldReserved);
         Assert.assertNotNull(reservedBy);
-        Assert.assertRegex(matchEndAt.toString(),DATE);
-        Assert.assertRegex(matchStartAt.toString(),DATE);
+        Assert.assertStartMatchDate(matchStartAt);
     }
 }

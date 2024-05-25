@@ -2,10 +2,7 @@ package com.example.MatchBooking.service.reservation;
 
 import com.example.MatchBooking.command.ReservationCommand;
 import com.example.MatchBooking.domain.Field;
-import com.example.MatchBooking.domain.Player;
 import com.example.MatchBooking.domain.Reservation;
-import com.example.MatchBooking.exception.BusinessException;
-import com.example.MatchBooking.exception.ExceptionPayloadFactory;
 import com.example.MatchBooking.repositories.ReservationRepository;
 import com.example.MatchBooking.service.field.FieldService;
 import com.example.MatchBooking.service.player.PlayerService;

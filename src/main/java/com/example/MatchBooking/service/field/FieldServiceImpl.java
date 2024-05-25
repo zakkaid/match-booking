@@ -1,6 +1,10 @@
 package com.example.MatchBooking.service.field;
 
 import com.example.MatchBooking.domain.Field;
+import com.example.MatchBooking.domain.FieldType;
+import com.example.MatchBooking.dto.FieldDTO;
+import com.example.MatchBooking.dto.mapper.FieldMapper;
+import com.example.MatchBooking.dto.mapper.FieldTypeMapper;
 import com.example.MatchBooking.exception.BusinessException;
 import com.example.MatchBooking.exception.ExceptionPayloadFactory;
 import com.example.MatchBooking.repositories.FieldRepository;
@@ -14,10 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FieldServiceImpl implements FieldService{
     private final FieldRepository fieldRepository;
+    private final FieldMapper fieldMapper;
 
     @Override
-    public List<Field> getAllAvailableFields(LocalDateTime reservationDate) {
-        return fieldRepository.findAllAvailableFields(reservationDate);
+    public List<FieldDTO> getAllAvailableFields(LocalDateTime reservationDate) {
+        return  fieldMapper.toFieldDTO(fieldRepository.findAllAvailableFields(reservationDate));
     }
     @Override
     public Field getFieldById(String id) {

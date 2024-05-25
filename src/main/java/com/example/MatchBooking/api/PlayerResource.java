@@ -2,11 +2,8 @@ package com.example.MatchBooking.api;
 
 import com.example.MatchBooking.command.PlayerCommand;
 import com.example.MatchBooking.command.ReservationCommand;
-import com.example.MatchBooking.domain.Field;
-import com.example.MatchBooking.domain.Player;
-import com.example.MatchBooking.enums.Position;
-import com.example.MatchBooking.exception.BusinessException;
-import com.example.MatchBooking.exception.ExceptionPayloadFactory;
+import com.example.MatchBooking.dto.FieldDTO;
+import com.example.MatchBooking.dto.mapper.FieldMapper;
 import com.example.MatchBooking.repositories.PlayerRepository;
 import com.example.MatchBooking.service.field.FieldService;
 import com.example.MatchBooking.service.player.PlayerService;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.example.MatchBooking.constants.ResourcePath.PLAYER;
 import static com.example.MatchBooking.constants.ResourcePath.V1;
@@ -25,24 +21,21 @@ import static com.example.MatchBooking.constants.ResourcePath.V1;
 @RestController
 @RequestMapping(V1+PLAYER)
 @RequiredArgsConstructor
+@CrossOrigin("http://http://localhost:3001/")
 public class PlayerResource {
     private final PlayerService playerService;
-    private final PlayerRepository playerRepository;
     private final FieldService fieldService;
     private final ReservationService reservationService;
+    private final FieldMapper fieldMapper;
 
     @PostMapping("/register" )
     public ResponseEntity<Void>addPlayer(@RequestBody PlayerCommand playerCommand){
         playerService.createPlayer(playerCommand);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/pl")
-    public ResponseEntity<List<List<Position>>> getPlayer(){
-        return ResponseEntity.ok(playerRepository.findById("player_id_1").stream().map(Player::getPositions).collect(Collectors.toList()));
-    }
 
     @GetMapping("/availableFields")
-    public ResponseEntity<List<Field>> getAvailableFields(@RequestParam LocalDateTime time){
+    public ResponseEntity<List<FieldDTO>> getAvailableFields(@RequestParam LocalDateTime time){
         return ResponseEntity.ok(fieldService.getAllAvailableFields(time));
     }
 
@@ -53,7 +46,7 @@ public class PlayerResource {
     }
 
     @GetMapping("/field")
-    public ResponseEntity<Field> getField(@RequestParam String id){
-        return ResponseEntity.ok(fieldService.getFieldById(id));
+    public ResponseEntity<FieldDTO> getField(@RequestParam String id){
+        return ResponseEntity.ok(fieldMapper.toFieldDTO(fieldService.getFieldById(id)));
     }
 }
