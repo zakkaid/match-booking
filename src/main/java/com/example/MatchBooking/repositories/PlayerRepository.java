@@ -11,4 +11,6 @@ public interface PlayerRepository extends JpaRepository< Player, String> {
     boolean credentialsTrue(String email , String password);
     @Query("SELECT u FROM Player u WHERE u.email = ?1 AND u.password = ?2")
     Player findIdByEmailAndPassword(String email , String password);
+    @Query("SELECT CASE WHEN (COUNT(e) > 0) THEN true ELSE false END FROM Player e WHERE e.email = ?1")
+    boolean emailAlreadyExist(String email);
 }

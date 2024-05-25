@@ -20,6 +20,8 @@ public class PlayerServiceImpl implements PlayerService{
     @Override
     public Player createPlayer(PlayerCommand playerCommand) {
         playerCommand.validate();
+        if(playerRepository.emailAlreadyExist(playerCommand.getEmail()))
+            throw new BusinessException(ExceptionPayloadFactory.EMAIL_ALREADY_EXIST.get());
         Player player = new Player(playerCommand);
         return playerRepository.save(player);
     }

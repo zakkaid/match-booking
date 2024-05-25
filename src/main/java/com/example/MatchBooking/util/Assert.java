@@ -19,7 +19,7 @@ public interface Assert {
 
     static void assertStartMatchDate(LocalDateTime dateTime){
         if( dateTime.isBefore(LocalDateTime.now()))
-            throw new BusinessException(ExceptionPayloadFactory.INVALID_PAYLOAD.get());
+            throw new BusinessException(ExceptionPayloadFactory.START_MATCH_DATE_INVALID.get());
     }
 
 }
